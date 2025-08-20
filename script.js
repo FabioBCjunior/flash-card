@@ -1,36 +1,79 @@
 const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAlternativa = document.querySelector(".caixa-alternativa");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-         enunciado:"Qual a principal função de um processador em um computador?",
-         alernativas:["Armazenar dados temporários","Executar cálculos e processar informações"]
-            },
+        enunciado: "Qual a principal função de um processador em um computador",
+        alternativas: [
+            "Armazenar dados temporários",
+            "Executar cálculos e processar informações"
+        ]
+    },
     {
-        enunciado:"Pergunta 2",
-        alernativas:["Alternativa 1","Alternativa 2"]
-            },
+        enunciado: "Pergunta 2",
+        alternativas: [
+            "Alternativa 1",
+            "Alternativa 2"
+        ]
+    },
+     {
+        enunciado: "Pergunta 3",
+        alternativas: [
+            "Alternativa 1",
+            "Alternativa 2"
+        ]
+    },
     {
-        enunciado:"Pergunta 3",
-        alernativas:["Alternativa 1","Alternativa 2"]
-            },
+        enunciado: "Pergunta 4",
+        alternativas: [
+            "Alternativa 1",
+            "Alternativa 2"
+        ]
+    },
     {
-        enunciado:"Pergunta 4",
-        alernativas:["Alternativa 1","Alternativa 2"]
-            },
-    {
-        enunciado:"Pergunta 5",
-        alernativas:["Alternativa 1","Alternativa 2"]
-            }
+        enunciado: "Pergunta 5",
+        alternativas: [
+            "Alternativa 1",
+            "Alternativa 2"
+        ]
+    }
 ];
 
 let atual = 0;
 let perguntaAtual;
-function mostraPergunta(){
-perguntaAtual = perguntas[atual];
-caixaPerguntas.textContent = perguntaAtual.enunciado;
+let historiaFInal;
+
+function mostraPergunta() {
+    if (atual >= perguntas.lenght){
+        mostraResultado();
+        return;
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
+
 }
-mostraPergunta()
+
+function mostraAlternativas(){
+    for (const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa;
+        botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+} 
+
+mostraPergunta();
+
+function respostaSelecionada(opcaoSelecionada){
+    const afirmacoes = opcaoSelecionada.afirmacoes;
+    historiaFInal = afirmacoes;
+    historiaFInal += afirmacoes = "";
+    atual++;
+    mostraPergunta();
+
+}
